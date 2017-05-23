@@ -149,7 +149,7 @@ namespace HealthVaultProviderManagementPortal.Controllers
         {
             if (id.HasValue)
             {
-                var response = await ExecuteMicrosoftHealthVaultRestApiAsync(api => api.GetActionPlanTasksByIdAsync(id.ToString()), personId, recordId);
+                var response = await ExecuteMicrosoftHealthVaultRestApiAsync(api => api.GetActionPlanTaskByIdAsync(id.ToString()), personId, recordId);
                 return this.View(response);
             }
 
@@ -236,7 +236,7 @@ namespace HealthVaultProviderManagementPortal.Controllers
         public async Task<ActionResult> ValidateTracking(Guid id, string thing, Guid personId, Guid recordId)
         {
             var restApi = await CreateMicrosoftHealthVaultRestApiAsync(personId, recordId);
-            var taskInstance = await restApi.GetActionPlanTasksByIdAsync(id.ToString());
+            var taskInstance = await restApi.GetActionPlanTaskByIdAsync(id.ToString());
 
             var trackingValidation = new TrackingValidation
             {
